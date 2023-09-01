@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "91c325d1-a180-42f6-8ce4-70a4078ca884",
+		"name": "Keycloak",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "377372",
+		"_collection_link": "https://speeding-space-240646.postman.co/workspace/KeyCloak~76389018-0486-42df-9357-8ed0522ad077/collection/377372-91c325d1-a180-42f6-8ce4-70a4078ca884?action=share&source=collection_link&creator=377372"
+	},
+	"item": [
+		{
+			"name": "Resource API",
+			"item": [
+				{
+					"name": "1. Resources",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "2. Resources - Auth Code",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client API",
+			"item": [
+				{
+					"name": "1. Client Credentials",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "2. Instrospect",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{client_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/realms/Spring/protocol/openid-connect/token/introspect",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"Spring",
+								"protocol",
+								"openid-connect",
+								"token",
+								"introspect"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Client API",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consent",
+			"item": [
+				{
+					"name": "1. Authorization Code - Start",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "2. Authorization Code - Token",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "3. Authorization Code - Refresh Token",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OpenId Endpoint Configuration",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
