@@ -6,13 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @FeignClient(
-        name = "resource-api-client",
-        url = "${resourceapi.endpoint}",
+        name = "resource-server-client",
+        url = "${resource.server.endpoint}",
         configuration = OAuthFeignConfig.class
 )
-public interface ResourceClient {
+public interface ResourceServerClient {
 
-    @GetMapping(value = "/resource")
-    ResponseEntity<Void> getResourceFromResourceServer();
+    @GetMapping(value = "/app/v1/resources")
+    ResponseEntity<String> getProtectedResources();
 }
 

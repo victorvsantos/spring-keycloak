@@ -10,26 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/resources")
 public class ResourceController {
 
     private static final Logger logger = LoggerFactory.getLogger(OAuthClientCredentialsFeignManager.class);
 
-    private final ResourceClient resourceClient;
+    private final ResourceServerClient resourceServerClient;
 
     @Autowired
-    public ResourceController(ResourceClient resourceClient) {
-        this.resourceClient = resourceClient;
+    public ResourceController(ResourceServerClient resourceServerClient) {
+        this.resourceServerClient = resourceServerClient;
     }
 
-    @GetMapping("/resource")
-    public ResponseEntity<Void> getProtectedResource() {
-        try {
-            resourceClient.getResourceFromResourceServer();
-        } catch (Exception ex) {
-            logger.error("There was a problem {}", ex);
-            return ResponseEntity.internalServerError().build();
-        }
-        return ResponseEntity.ok().build();
+    @GetMapping
+    public ResponseEntity<ResourceAPIResult> getProtectedResource() {
+        logger.info("Calling protected resources API");
+        ResponseEntity<String> response = resourceServerClient.getProtectedResources();
+        return ResponseEntity.ok(new ResourceAPIResult(response.getBody()));
     }
 }
