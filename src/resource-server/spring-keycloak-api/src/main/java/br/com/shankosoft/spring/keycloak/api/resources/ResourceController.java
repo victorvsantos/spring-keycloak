@@ -6,11 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/resource")
+@RequestMapping("/v1/resources")
 public class ResourceController {
 
     @GetMapping
-    public ResponseEntity<Void> getResource() {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> getResource() {
+        return ResponseEntity
+                .ok("This is a protected resource. You must have a token generated for the spring-app audience to access it");
     }
 }
