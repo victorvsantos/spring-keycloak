@@ -5,7 +5,7 @@ services:
     image: mysql:8.1
     hostname: mysql
     volumes:
-      - ./mysql:/docker-entrypoint-initdb.d/
+      - ./docker/mysql:/docker-entrypoint-initdb.d/
     environment:
     - MYSQL_ROOT_PASSWORD=root_pwd
     - MYSQL_DATABASE=keycloak
@@ -21,6 +21,7 @@ services:
     environment:
       - PMA_ARBITRARY=1
   keycloak:
+    hostname: keycloak
     image: quay.io/keycloak/keycloak:19.0.1
     environment:
     - KEYCLOAK_ADMIN=admin
@@ -38,4 +39,22 @@ services:
       - db
     restart: on-failure:10
     volumes:
-      - ./keycloak/realm.json:/opt/keycloak/data/import/realm.json
+      - ./docker/keycloak/realm.json:/opt/keycloak/data/import/realm.json
+  java-client-api:
+    hostname: client-api
+    ports:
+      - 8091:8091
+    build:
+      context: ./src/client/spring-keycloak-client-api
+      dockerfile: ./Dockerfile
+    restart: always
+  java-resource-api:
+    hostname: resource-api
+    ports:
+      - 8090:8090
+    build:
+      context: ./src/resource-server/spring-keycloak-api
+      dockerfile: ./Dockerfile
+    depends_on: 
+      - keycloak
+    restart: always
