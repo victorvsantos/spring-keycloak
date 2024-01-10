@@ -2,7 +2,7 @@
 
 ## :scroll: About this project
 
-This project was built as a way to study Keycloak as an authorization server and the possibilities of using it with a Java Spring Rest APIs.
+The project consists of an authorization server (keycloak), a public REST API to act as an proxy and a private REST API (resource server). The goal was to try some of the OAuth2 grant types and validate private communication between applications using client credentials
 
 
 ## :gear: Technologies
@@ -13,7 +13,7 @@ This project was built as a way to study Keycloak as an authorization server and
 - `Spring Boot 2.7.0`
 - `Docker`
 
-## Architecture
+## Communication Flow
 
 ![Architecture Diagram](docs/architecture.PNG)
 
